@@ -1,0 +1,13 @@
+numpy
+pandas
+scipy
+matplotlib
+torch
+transformers
+tokenizers
+datasets
+pyarrow
+fasttext
+nltk
+huggingface_hub
+wandb
