@@ -1,13 +1,13 @@
 # Code release: code-switching emergence and scaling in bilingual LMs
 
-Replication bundle for the paper.
+Our code release for our paper.
 
-**Figures only** (no corpora, no GPU): the numeric tables in `figures/data/` and
+**Figures only** (no corpora downloaded, no GPU): the numeric tables in `figures/data/` and
 `fits/data/` are enough.
 
 **Train or rescore models:** download the official corpora (links in
 [`DATA.md`](DATA.md)), then run the pipeline below. This repo does not ship
-tweet text, FineWeb shards, or ACS sentences.
+tweet text, FineWeb shards, or ACS sentences due to licensing.
 
 | Corpus | Link |
 |---|---|
@@ -29,7 +29,7 @@ Architecture tags in the CSVs: `t11`=11M, `t22`=22M, `gpt2sL4`=52M,
 `gpt2sL12`=108M, `gpt2mL16`=232M, `gpt2mL24`=334M, `gpt2lL24`=511M,
 `gpt2xlL25`=817M.
 
-## Train from scratch
+## Train models:
 
 1. Copy `paths.env.example` → `paths.env`. Set `CS_ROOT` (writable work dir) and
    `CS_ENV` (venv with `requirements.txt`). Optional Slurm site flags:
@@ -76,10 +76,13 @@ source `_env.sh` and submit through `sbatch_site`.
 
 ## Conventions
 
-- Columns named `monoweb_*` are historical; paper runs evaluate on **SoloWeb**
-  held-out (`MONO_HELDOUT`).
+- Columns named `monoweb_*` are historical; paper runs evaluate on held-out average monolingual docs (we call this SoloWeb internally) (`MONO_HELDOUT`).
 - All paper runs use the joint 30k BPE trained on SoloWeb-EN/DE + leak-free
   TongueSwitcher + Denglisch. The BPE is trained with `add_prefix_space=False`;
   every consumer loads with `True`, and the saved tokenizer pins `True`.
 - Run-directory prefixes (`exp12_sw7_*`, `exp12_swp0_*`, …) are historical names
   kept so the shipped CSVs still match. They are not site-specific.
+
+## Disclosure:
+
+This repo was packaged together by the authors with the help of Claude Fable 5 and Grok 4.6.
